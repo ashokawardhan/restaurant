@@ -4,12 +4,10 @@ const initialState = JSON.parse(window.localStorage.getItem('recentSearches') ||
 export default (state = initialState, action) => {
     switch(action.type) {
         case 'SAVE_SEARCH':
-            if (state.indexOf(action.search) > -1) {
-                return state;
-            }
+            const actionSearch = action.search.filter(search => state.indexOf(search) === -1);
             const newState = [
                 ...state,
-                action.search
+                ...actionSearch
             ];
             window.localStorage.setItem('recentSearches', JSON.stringify(newState));
             return newState;

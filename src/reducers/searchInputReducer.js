@@ -8,18 +8,26 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case 'SAVE_SEARCH':
-            if (!action.search || state.currentSearchList.indexOf(action.search) > -1) {
+            if (action.search.length === 0) {
                 return state;
             }
+            const actionSearch = action.search.filter(search => state.currentSearchList.indexOf(search) === -1);
             const newSearchList = [
                 ...state.currentSearchList,
-                action.search
+                ...actionSearch
             ];
             return {
                 ...state,
                 currentSearchList: newSearchList,
                 searchText: ''
-            }
+            };
+        case 'REMOVE_SEARCH':
+            const removedSearchList = state.currentSearchList.filter(search => search !== action.search);
+            return {
+                ...state,
+                currentSearchList: removedSearchList,
+                searchText: ''
+            };
         case 'FOCUS_SEARCH':
             return {
                 ...state,

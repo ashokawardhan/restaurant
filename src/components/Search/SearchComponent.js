@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import styled from "styled-components";
 import Cross from '../commons/cross';
+import TagsContainer from '../tags/TagsContainer';
 
 const SearchBar = styled.div`
     border: solid 1px #ccc;
@@ -8,8 +9,14 @@ const SearchBar = styled.div`
     position: relative;
     display: flex;
     margin: 60px 120px 0px 120px;
+    box-shadow: 0 3px 2px #ccc;
     @media (max-width: 768px) {
-        margin: -10px -10px 0px -10px;
+        margin: -8px -8px 0px -8px;
+        box-shadow: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+
     }
 `;
 
@@ -36,22 +43,25 @@ const SearchLabel = styled.label`
 
 export default (props) => {
     return (
-        <SearchBar>
-            <SearchLabel
-                htmlFor="search-bar"
-                className={props.searchText.length > 0 ? "active": "inactive"}
-            >
-                {'Search for cuisine or restaurant'}
-            </SearchLabel>
-            <SearchInput 
-                id="search-bar"
-                value={props.searchText}
-                onChange={props.onChange}
-                onKeyDown={props.onKeyDown}
-                onFocus={props.onFocus}
-                onBlur={props.onBlur}
-            />
-            <Cross onClick={props.clear} />
-        </SearchBar>
+        <Fragment>
+            <SearchBar>
+                <SearchLabel
+                    htmlFor="search-bar"
+                    className={props.searchText.length > 0 ? "active": "inactive"}
+                >
+                    {'Search for cuisine or restaurant'}
+                </SearchLabel>
+                <SearchInput 
+                    id="search-bar"
+                    value={props.searchText}
+                    onChange={props.onChange}
+                    onKeyDown={props.onKeyDown}
+                    onFocus={props.onFocus}
+                    onBlur={props.onBlur}
+                />
+                <Cross onClick={props.clear} />
+            </SearchBar>
+            <TagsContainer />
+        </Fragment>
     );
 }

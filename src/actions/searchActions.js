@@ -1,5 +1,6 @@
 import axios from 'axios';
 export const saveSearch = searchText => ({ type: "SAVE_SEARCH", search: searchText });
+export const removeSearch = searchText => ({ type: "REMOVE_SEARCH", search: searchText });
 export const focusSearch = () => ({ type: "FOCUS_SEARCH" });
 export const blurSearch = () => ({ type: "BLUR_SEARCH" });
 export const changeSearch = searchText => ({ type: "SEARCH_INPUT", search: searchText });
@@ -27,10 +28,19 @@ const failedRestaurantsList = () => ({ type: "FAILED_RESTAURANTS" });
 
 export const searchItems = (searchList, searchText) => {
     return async (dispatch) => {
-        dispatch(saveSearch(searchText));
-        if (searchText && searchList.indexOf(searchText) === -1) {
-            const newSearchList = [...searchList, searchText];
-            dispatch(loadingRestaurantsList(searchText));
+        let searchTextArray = [];
+        if (searchText) {
+            if (searchText.indexOf(' ') > -1) {
+                searchTextArray = searchText.split(' ');
+            } else {
+                searchTextArray = [searchText];
+            }
+            dispatch(saveSearch(searchTextArray));
+        }
+        searchTextArray = searchTextArray.filter(search => searchList.indexOf(search) === -1);
+        const newSearchList = [...searchList, ...searchTextArray];
+        if (!searchText || newSearchList !== searchList) {
+            dispatch(loadingRestaurantsList());
             try {
                 const res = await axios.post('/restaurants', { list: newSearchList });
                 dispatch(updateRestaurantsList(res.data));
