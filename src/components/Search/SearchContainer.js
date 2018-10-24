@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import SearchComponent from './SearchComponent';
-import { focusSearch, blurSearch, changeSearch, searchItems, autoCompleteText } from '../../actions/searchActions';
+import { focusSearch, blurSearch, changeSearch } from '../../actions/searchActions';
+import { searchRestaurants } from '../../actions/restaurantActions';
+import { autoCompleteText } from '../../actions/autocompleteActions';
 
 class SearchContainer extends Component {
     onChange = (event) => {
@@ -19,7 +21,7 @@ class SearchContainer extends Component {
 
     submit = (event) => {
         if (event.keyCode === 13 && this.props.searchText.length > 0 && !this.props.inList) { // 13 for enter
-            this.props.searchItems(this.props.currentSearchList, this.props.searchText);
+            this.props.searchRestaurants(this.props.currentSearchList, this.props.searchText);
         }
         if (event.keyCode === 27) { //27 is the code for escape
             document.getElementById("search-bar").blur();
@@ -54,7 +56,7 @@ const mapDispatchToProps = {
     focusSearch,
     blurSearch,
     changeSearch,
-    searchItems,
+    searchRestaurants,
     autoCompleteText
 };
 

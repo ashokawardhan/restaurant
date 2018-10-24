@@ -1,9 +1,9 @@
-console.log(window.localStorage.getItem('recentSearches'));
-const initialState = JSON.parse(window.localStorage.getItem('recentSearches') || '[]');
+import { ACTION_TYPES_SEARCH } from '../actions/searchActions';
+const initialState = typeof window !== 'undefined' ? JSON.parse(window.localStorage.getItem('recentSearches') || '[]') : [];
 
 export default (state = initialState, action) => {
     switch(action.type) {
-        case 'SAVE_SEARCH':
+        case ACTION_TYPES_SEARCH.SAVE_SEARCH_TAG:
             const actionSearch = action.search.filter(search => state.indexOf(search) === -1);
             const newState = [
                 ...state,

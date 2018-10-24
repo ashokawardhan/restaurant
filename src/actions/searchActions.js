@@ -1,52 +1,14 @@
-import axios from 'axios';
-export const saveSearch = searchText => ({ type: "SAVE_SEARCH", search: searchText });
-export const removeSearch = searchText => ({ type: "REMOVE_SEARCH", search: searchText });
-export const focusSearch = () => ({ type: "FOCUS_SEARCH" });
-export const blurSearch = () => ({ type: "BLUR_SEARCH" });
-export const changeSearch = searchText => ({ type: "SEARCH_INPUT", search: searchText });
-export const inList = focus => ({ type: "IN_LIST", focus});
-
-const loadingAutocompleteList = current => ({ type: "LOADING_LIST", current });
-const updateAutocompleteList = list => ({ type: "UPDATE_LIST", list });
-const failedAutocompleteList = () => ({ type: "FAILED_LIST" });
-
-export const autoCompleteText = text => {
-    return async (dispatch) => {
-        dispatch(loadingAutocompleteList(text));
-        try {
-            const res = await axios.post('/autocomplete', { text });
-            dispatch(updateAutocompleteList(res.data));
-        } catch(err) {
-            dispatch(failedAutocompleteList());
-        };
-    }
+export const ACTION_TYPES_SEARCH = {
+    REMOVE_SEARCH_TAG: "REMOVE_SEARCH_TAG",
+    FOCUS_SEARCH_FIELD: "FOCUS_SEARCH_FIELD",
+    BLUR_SEARCH_FIELD: "BLUR_SEARCH_FIELD",
+    INPUT_TEXT_CHANGE: "INPUT_TEXT_CHANGE",
+    KEYBOARD_IN_LIST: "KEYBOARD_IN_LIST",
+    SAVE_SEARCH_TAG: "SAVE_SEARCH_TAG"
 }
-
-const loadingRestaurantsList = () => ({ type: "LOADING_RESTAURANTS" });
-const updateRestaurantsList = list => ({ type: "UPDATE_RESTAURANTS", list });
-const failedRestaurantsList = () => ({ type: "FAILED_RESTAURANTS" });
-
-export const searchItems = (searchList, searchText) => {
-    return async (dispatch) => {
-        let searchTextArray = [];
-        if (searchText) {
-            if (searchText.indexOf(' ') > -1) {
-                searchTextArray = searchText.split(' ');
-            } else {
-                searchTextArray = [searchText];
-            }
-            dispatch(saveSearch(searchTextArray));
-        }
-        searchTextArray = searchTextArray.filter(search => searchList.indexOf(search) === -1);
-        const newSearchList = [...searchList, ...searchTextArray];
-        if (!searchText || newSearchList !== searchList) {
-            dispatch(loadingRestaurantsList());
-            try {
-                const res = await axios.post('/restaurants', { list: newSearchList });
-                dispatch(updateRestaurantsList(res.data));
-            } catch (err) {
-                dispatch(failedRestaurantsList(err.message));
-            };
-        }
-    }
-}
+export const saveSearch = searchText => ({ type: ACTION_TYPES_SEARCH.SAVE_SEARCH_TAG, search: searchText });
+export const removeSearch = searchText => ({ type: ACTION_TYPES_SEARCH.REMOVE_SEARCH_TAG, search: searchText });
+export const focusSearch = () => ({ type: ACTION_TYPES_SEARCH.FOCUS_SEARCH_FIELD });
+export const blurSearch = () => ({ type: ACTION_TYPES_SEARCH.BLUR_SEARCH_FIELD });
+export const changeSearch = searchText => ({ type: ACTION_TYPES_SEARCH.INPUT_TEXT_CHANGE, search: searchText });
+export const inList = focus => ({ type: ACTION_TYPES_SEARCH.KEYBOARD_IN_LIST, focus});

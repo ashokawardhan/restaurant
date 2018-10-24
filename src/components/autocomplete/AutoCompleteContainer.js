@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import List from '../commons/listSearches';
-import { searchItems } from '../../actions/searchActions';
+import { searchRestaurants } from '../../actions/restaurantActions';
 
 class AutoCompleteContainer extends Component {
     selectItem = (text) => {
-        this.props.searchItems(this.props.currentSearchList, text);
+        this.props.searchRestaurants(this.props.currentSearchList, text);
     }
 
     render() {
@@ -28,7 +28,7 @@ const mapStateToProps = ({ autocomplete, searchInput }) => ({
 });
 
 const mapDispatchToProps = {
-    searchItems
+    searchRestaurants
 };
 
 export default connect(

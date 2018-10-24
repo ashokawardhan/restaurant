@@ -10,10 +10,10 @@ const TagsContainer = styled.div`
 
 const TagContainer = styled.div`
     background-color: #90EE90;
+    cursor: pointer;
     display: inline-flex;
     padding: 5px 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 0 8px 8px;
 `;
 
 const CloseIcon = styled.div`

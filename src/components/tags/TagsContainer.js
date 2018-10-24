@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import TagsComponent from './TagsComponent';
-import { searchItems, removeSearch } from '../../actions/searchActions';
+import { removeSearch } from '../../actions/searchActions';
+import { searchRestaurants } from '../../actions/restaurantActions';
 
 class RecentContainer extends Component {
     deleteItem = (text) => {
         const newSearchList = this.props.currentSearchList.filter(search => search !== text);
-        this.props.searchItems(newSearchList);
+        this.props.searchRestaurants(newSearchList);
         this.props.removeSearch(text);
     }
 
     render() {
-        if (this.props.currentSearchList.length === 0) {
-            return null;
-        }
         return (
             <TagsComponent
                 list={this.props.currentSearchList}
@@ -28,7 +26,7 @@ const mapStateToProps = ({ searchInput }) => ({
 });
 
 const mapDispatchToProps = {
-    searchItems,
+    searchRestaurants,
     removeSearch
 };
 

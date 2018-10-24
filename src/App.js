@@ -24,15 +24,16 @@ class App extends Component {
                 <SearchContainer />
                 {this.props.inputFocus && this.props.searchText.length === 0 && <RecentContainer />}
                 {this.props.inputFocus && this.props.searchText.length > 0 && <AutoCompleteContainer />}
-                {!this.props.inputFocus && <div>ABC</div>}
+                {!this.props.inputFocus && this.props.restaurants[0] && this.props.restaurants[0].length > 0 && <div>ABC</div>}
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ searchInput }) => ({
+const mapStateToProps = ({ searchInput, restaurants }) => ({
     inputFocus: searchInput.focus,
-    searchText: searchInput.searchText
+    searchText: searchInput.searchText,
+    restaurants: restaurants.restaurants
 });
 
 export default connect(

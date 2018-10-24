@@ -20,6 +20,7 @@ require("@babel/register")({
   plugins: [
     "babel-plugin-styled-components",
     "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
     "dynamic-import-node-babel-7",
     "react-loadable/babel"
   ]

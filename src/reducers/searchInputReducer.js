@@ -1,3 +1,4 @@
+import {ACTION_TYPES_SEARCH} from '../actions/searchActions';
 const initialState = {
     focus: false,
     searchText: '',
@@ -7,7 +8,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case 'SAVE_SEARCH':
+        case ACTION_TYPES_SEARCH.SAVE_SEARCH_TAG:
             if (action.search.length === 0) {
                 return state;
             }
@@ -21,30 +22,30 @@ export default (state = initialState, action) => {
                 currentSearchList: newSearchList,
                 searchText: ''
             };
-        case 'REMOVE_SEARCH':
+        case ACTION_TYPES_SEARCH.REMOVE_SEARCH_TAG:
             const removedSearchList = state.currentSearchList.filter(search => search !== action.search);
             return {
                 ...state,
                 currentSearchList: removedSearchList,
                 searchText: ''
             };
-        case 'FOCUS_SEARCH':
+        case ACTION_TYPES_SEARCH.FOCUS_SEARCH_FIELD:
             return {
                 ...state,
                 focus: true
             };
-        case 'BLUR_SEARCH':
+        case ACTION_TYPES_SEARCH.BLUR_SEARCH_FIELD:
             return {
                 ...state,
                 focus: false
             };
-        case 'SEARCH_INPUT':
+        case ACTION_TYPES_SEARCH.INPUT_TEXT_CHANGE:
             return {
                 ...state,
                 searchText: action.search,
                 inList: false
             };
-        case 'IN_LIST':
+        case ACTION_TYPES_SEARCH.KEYBOARD_IN_LIST:
             return {
                 ...state,
                 inList: action.focus
