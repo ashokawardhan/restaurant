@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 window.onload = () => {
     Loadable.preloadReady().then(() => {
-        ReactDOM.hydrate(<AppContainer />, document.getElementById("root"));
+        ReactDOM.hydrate(<AppContainer />, document.getElementById('root'));
     });
 };
 

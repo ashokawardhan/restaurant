@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import List from '../commons/listSearches';
 import { searchRestaurants } from '../../actions/restaurantActions';
 
@@ -15,7 +15,7 @@ class RecentContainer extends Component {
         return (
             <List
                 list={this.props.recentSearches}
-                title={'Recent Searches'}
+                title="Recent Searches"
                 onSelect={this.selectItem}
             />
         );
@@ -26,14 +26,14 @@ const mapStateToProps = ({ recentSearches, searchInput }) => ({
     recentSearches,
     searchText: searchInput.searchText,
     inputFocus: searchInput.focus,
-    currentSearchList: searchInput.currentSearchList
+    currentSearchList: searchInput.currentSearchList,
 });
 
 const mapDispatchToProps = {
-    searchRestaurants
+    searchRestaurants,
 };
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(RecentContainer);

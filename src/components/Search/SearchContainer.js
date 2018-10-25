@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import SearchComponent from './SearchComponent';
 import { focusSearch, blurSearch, changeSearch } from '../../actions/searchActions';
 import { searchRestaurants } from '../../actions/restaurantActions';
@@ -23,8 +23,8 @@ class SearchContainer extends Component {
         if (event.keyCode === 13 && this.props.searchText.length > 0 && !this.props.inList) { // 13 for enter
             this.props.searchRestaurants(this.props.currentSearchList, this.props.searchText);
         }
-        if (event.keyCode === 27) { //27 is the code for escape
-            document.getElementById("search-bar").blur();
+        if (event.keyCode === 27) { // 27 is the code for escape
+            document.getElementById('search-bar').blur();
         }
     }
 
@@ -49,7 +49,7 @@ class SearchContainer extends Component {
 const mapStateToProps = ({ searchInput }) => ({
     searchText: searchInput.searchText,
     inList: searchInput.inList,
-    currentSearchList: searchInput.currentSearchList
+    currentSearchList: searchInput.currentSearchList,
 });
 
 const mapDispatchToProps = {
@@ -57,10 +57,10 @@ const mapDispatchToProps = {
     blurSearch,
     changeSearch,
     searchRestaurants,
-    autoCompleteText
+    autoCompleteText,
 };
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(SearchContainer);

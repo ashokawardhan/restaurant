@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import TagsComponent from './TagsComponent';
 import { removeSearch } from '../../actions/searchActions';
 import { searchRestaurants } from '../../actions/restaurantActions';
@@ -22,15 +22,15 @@ class RecentContainer extends Component {
 }
 
 const mapStateToProps = ({ searchInput }) => ({
-    currentSearchList: searchInput.currentSearchList
+    currentSearchList: searchInput.currentSearchList,
 });
 
 const mapDispatchToProps = {
     searchRestaurants,
-    removeSearch
+    removeSearch,
 };
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(RecentContainer);

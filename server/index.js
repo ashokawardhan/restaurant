@@ -1,3 +1,4 @@
+import request from 'request';
 import express from "express";
 import Loadable from 'react-loadable';
 import bodyParser from "body-parser";
@@ -23,6 +24,12 @@ app.post('/autocomplete', (req, res) => {
 
 app.post('/restaurants', (req, res, next) => {
     res.send(findRestaurants(req.body.list, req.body.pageNo));
+});
+
+app.get('/images', (req, res) => {
+    //modify the url in any way you want
+    var newurl = 'https://loremflickr.com/110/110/food/';
+    req.pipe(request(newurl)).on('error', (err) => { res.status(500).json({message: 'image not found'})}).pipe(res);
 });
 
 // start the app

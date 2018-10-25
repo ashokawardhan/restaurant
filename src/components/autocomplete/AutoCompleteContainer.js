@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import List from '../commons/listSearches';
 import { searchRestaurants } from '../../actions/restaurantActions';
 
@@ -24,14 +24,14 @@ class AutoCompleteContainer extends Component {
 const mapStateToProps = ({ autocomplete, searchInput }) => ({
     autocomplete,
     searchText: searchInput.searchText,
-    currentSearchList: searchInput.currentSearchList
+    currentSearchList: searchInput.currentSearchList,
 });
 
 const mapDispatchToProps = {
-    searchRestaurants
+    searchRestaurants,
 };
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(AutoCompleteContainer);

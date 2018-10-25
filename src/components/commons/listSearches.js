@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import styled from "styled-components";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { inList } from '../../actions/searchActions';
 
 const ListContainer = styled.div`
@@ -34,6 +34,7 @@ const Bar = styled.hr`
 
 class ListSearches extends Component {
     state = { selectedIndex: -1 };
+
     constructor() {
         super();
         this.inputFocusChange = this.inputFocusChange.bind(this);
@@ -42,7 +43,7 @@ class ListSearches extends Component {
 
     componentWillReceiveProps() {
         this.setState({
-            selectedIndex: -1
+            selectedIndex: -1,
         });
     }
 
@@ -54,9 +55,9 @@ class ListSearches extends Component {
         if (this.props.inputFocus) {
             if (event.keyCode === 13 && this.state.selectedIndex >= 0) {
                 this.props.onSelect(this.props.list[this.state.selectedIndex]);
-            };
+            }
 
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 let selectedIndex = prevState.selectedIndex;
                 if (event.keyCode === 40) {
                     if (selectedIndex === this.props.list.length - 1) {
@@ -76,27 +77,25 @@ class ListSearches extends Component {
                     }
                 }
                 return {
-                    selectedIndex
+                    selectedIndex,
                 };
             });
         }
     }
 
     render() {
-        const {title, list} = this.props;
-        const {selectedIndex} = this.state;
+        const { title, list } = this.props;
+        const { selectedIndex } = this.state;
         return (
             <ListContainer>
                 {title && <Title>{title}</Title>}
                 {
-                    list.map((item, index) => {
-                        return (
-                            <ItemContainer className={index === selectedIndex ? 'active' : ''} onMouseDown={() => this.props.onSelect(item)}>
-                                <Text>{item}</Text>
-                                <Bar />
-                            </ItemContainer>
-                        )
-                    })
+                    list.map((item, index) => (
+                        <ItemContainer className={index === selectedIndex ? 'active' : ''} onMouseDown={() => this.props.onSelect(item)}>
+                            <Text>{item}</Text>
+                            <Bar />
+                        </ItemContainer>
+                    ))
                 }
             </ListContainer>
         );
@@ -104,14 +103,14 @@ class ListSearches extends Component {
 }
 
 const mapStateToProps = ({ searchInput }) => ({
-    inputFocus: searchInput.focus
+    inputFocus: searchInput.focus,
 });
 
 const mapDispatchToProps = {
-    inList
+    inList,
 };
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(ListSearches);

@@ -2,9 +2,9 @@ import {
     createStore,
     combineReducers,
     compose,
-    applyMiddleware
+    applyMiddleware,
 } from 'redux';
-import ReduxThunk from 'redux-thunk'
+import ReduxThunk from 'redux-thunk';
 import recentSearches from '../reducers/recentSearchesReducer';
 import searchInput from '../reducers/searchInputReducer';
 import autocomplete from '../reducers/autocompleteReducer';
@@ -19,13 +19,13 @@ const rootReducer = combineReducers({
     recentSearches,
     searchInput,
     autocomplete,
-    restaurants
+    restaurants,
 });
 
 export default function configureStore(initialState = {}) {
     return createStoreWithMiddleware(
         rootReducer,
-        initialState
-        //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        initialState,
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
-};
+}

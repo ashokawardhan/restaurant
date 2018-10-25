@@ -23,15 +23,13 @@ const CloseIcon = styled.div`
 `;
 
 
-export default (props) => {
-    return(
-        <TagsContainer>
-            {props.list.map((item) => (
-                <TagContainer onMouseDown={() => props.onClick(item)}>
-                    <CloseIcon>&times;</CloseIcon>
-                    <div>{item}</div>
-                </TagContainer>
-            ))}
-        </TagsContainer>
-    )
-}
+export default props => (
+    <TagsContainer>
+        {props.list.map(item => (
+            <TagContainer onMouseDown={() => props.onClick(item)}>
+                <CloseIcon aria-label="Remove">&times;</CloseIcon>
+                <div>{item}</div>
+            </TagContainer>
+        ))}
+    </TagsContainer>
+);

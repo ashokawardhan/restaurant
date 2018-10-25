@@ -2,14 +2,18 @@ import {cuisines} from './cuisines';
 import {restaurantNameList} from './restaurants';
 
 const getRandomElements = (list, noItems) => {
+    let searchList = [...list];
     let result = [];
     for (let i = 0; i < noItems; i++) {
-        result.push(list[Math.floor(Math.random() * list.length)]);
+        const itemPosition = Math.floor(Math.random() * searchList.length);
+        const item = searchList[itemPosition];
+        item && !result.some(contained => contained.toLowerCase() === item.toLowerCase()) && result.push(item);
+        searchList.splice(itemPosition, 1);
     }
     return result;
 };
 
 export default (search) => {
     const list = [...cuisines, ...restaurantNameList];
-    return getRandomElements(list.filter(name => name.indexOf(search) > -1), 10);
+    return getRandomElements(list.filter(name => name.toLowerCase().indexOf(search.toLowerCase()) > -1), 10);
 }

@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react';
-import styled from "styled-components";
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
 import Cross from '../commons/cross';
 import TagsContainer from '../tags/TagsContainer';
 
@@ -34,34 +34,31 @@ const SearchLabel = styled.label`
     transform: translate(0, 25px) scale(1);
     transform-origin: top left;
     transition: all .2s ease-in-out;
-    color: gray;
     &.active {
         transform: translate(0, 8px) scale(.75);
         font-size: 18px;
     }
 `;
 
-export default (props) => {
-    return (
-        <Fragment>
-            <SearchBar>
-                <SearchLabel
-                    htmlFor="search-bar"
-                    className={props.searchText.length > 0 ? "active": "inactive"}
-                >
-                    {'Search for cuisine or restaurant'}
-                </SearchLabel>
-                <SearchInput 
-                    id="search-bar"
-                    value={props.searchText}
-                    onChange={props.onChange}
-                    onKeyDown={props.onKeyDown}
-                    onFocus={props.onFocus}
-                    onBlur={props.onBlur}
-                />
-                <Cross onClick={props.clear} />
-            </SearchBar>
-            <TagsContainer />
-        </Fragment>
-    );
-}
+export default props => (
+    <Fragment>
+        <SearchBar>
+            <SearchLabel
+                htmlFor="search-bar"
+                className={props.searchText.length > 0 ? 'active' : 'inactive'}
+            >
+                {'Search for cuisine or restaurant'}
+            </SearchLabel>
+            <SearchInput
+                id="search-bar"
+                value={props.searchText}
+                onChange={props.onChange}
+                onKeyDown={props.onKeyDown}
+                onFocus={props.onFocus}
+                onBlur={props.onBlur}
+            />
+            <Cross onClick={props.clear} aria-label="clear" />
+        </SearchBar>
+        <TagsContainer />
+    </Fragment>
+);

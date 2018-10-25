@@ -4,19 +4,23 @@ import {cuisines} from './cuisines';
 const restaurantsList = [];
 export const restaurantNameList = [];
 const getRandomCuisines = (neededCuisines) => {
+    let searchList = [...cuisines];
     let result = [];
     for (let i = 0; i < neededCuisines; i++) {
-        result.push(cuisines[Math.floor(Math.random() * cuisines.length)]);
+        const itemPosition = Math.floor(Math.random() * cuisines.length);
+        const item = searchList[itemPosition];
+        item && !result.some(contained => contained.toLowerCase() === item.toLowerCase()) && result.push(item);
+        searchList.splice(itemPosition, 1);
     }
     return result;
 };
 const getRestaurant = () => (
     {
-        name: faker.company.companyName(),
-        image: 'https://loremflickr.com/320/240/food/',
+        name: faker.company.companyName().replace(new RegExp(',|-|&', 'g'), '').slice(0, 10),
+        image: `/images?id=${faker.random.number()}`,
         cuisines: getRandomCuisines(5),
         rating: Math.floor((Math.random() * (500 - 100)) + 100) / 100,
-        deliveryTime: Math.floor((Math.random() * (150 - 30)) + 30),
+        deliveryTime: Math.floor((Math.random() * (119 - 30)) + 30),
         id: faker.random.uuid()
     }
 );
@@ -31,13 +35,13 @@ export const generateListOfRestaurants = (neededRestaurants) => {
 
 export const findRestaurants = (tags, page) => {
     return restaurantsList.filter((restaurant) => {
-        const nameFlag = tags.some(tag => restaurant.name.indexOf(tag) > -1);
+        const nameFlag = tags.some(tag => restaurant.name.toLowerCase().indexOf(tag.toLowerCase()) > -1);
         if (nameFlag) {
             return true;
         }
         const cuisineFlag = tags.some(tag => {
-            return restaurant.cuisines.some(cuisine => cuisine.indexOf(tag) > -1);
+            return restaurant.cuisines.some(cuisine => cuisine.toLowerCase().indexOf(tag.toLowerCase()) > -1);
         });
         return cuisineFlag;
-    }).slice((page * 20), (((page + 1) * 20) - 1));
+    }).slice((page * 18), (((page + 1) * 18)));
 }
