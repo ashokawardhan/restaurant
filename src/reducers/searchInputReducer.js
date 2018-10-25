@@ -1,5 +1,6 @@
 import { ACTION_TYPES_SEARCH } from '../actions/searchActions';
-
+import URI from 'urijs';
+const uri = new URI();
 const initialState = {
     focus: false,
     searchText: '',
@@ -18,6 +19,8 @@ export default (state = initialState, action) => {
             ...state.currentSearchList,
             ...actionSearch,
         ];
+        uri.setQuery('q', newSearchList.toString());
+        window.history.pushState({}, "Restaurant Search", uri.href());
         return {
             ...state,
             currentSearchList: newSearchList,

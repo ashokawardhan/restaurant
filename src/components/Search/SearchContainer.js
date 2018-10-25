@@ -23,7 +23,7 @@ class SearchContainer extends Component {
         if (event.keyCode === 13 && this.props.searchText.length > 0 && !this.props.inList) { // 13 for enter
             this.props.searchRestaurants(this.props.currentSearchList, this.props.searchText);
         }
-        if (event.keyCode === 27) { // 27 is the code for escape
+        if (event.keyCode === 27) { // 27 for escape
             document.getElementById('search-bar').blur();
         }
     }

@@ -48,11 +48,12 @@ class RestaurantsContainer extends Component {
 
     render() {
         const { restaurants } = this.props;
+        const restaurantsListClone = [...restaurants.restaurants];
         const restaurantsList = this.state.sortNone
-            ? restaurants.restaurants
+            ? restaurantsListClone
             : this.state.sortRating
-                ? restaurants.restaurants.sort((a, b) => b.rating - a.rating)
-                : restaurants.restaurants.sort((a, b) => a.deliveryTime - b.deliveryTime);
+                ? restaurantsListClone.sort((a, b) => b.rating - a.rating)
+                : restaurantsListClone.sort((a, b) => a.deliveryTime - b.deliveryTime);
         return (
             <RestaurantsComponent
                 loadMoreRestaurants={this.loadMoreRestaurants}

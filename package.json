@@ -16,7 +16,8 @@
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.0.2"
+    "styled-components": "^4.0.2",
+    "urijs": "^1.19.1"
   },
   "scripts": {
     "start": "npm run build && node server/bootstrap.js",
@@ -24,9 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint": "eslint --fix src/ && eslint --fix server/",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "eslint": "eslint --fix src/ && eslint --fix server/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,10 +49,6 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-stage-0": "^7.0.0",
-    "@storybook/addon-actions": "^4.0.0-rc.3",
-    "@storybook/addon-links": "^4.0.0-rc.3",
-    "@storybook/addons": "^4.0.0-rc.3",
-    "@storybook/react": "^4.0.0-rc.3",
     "babel-eslint": "9.x",
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",

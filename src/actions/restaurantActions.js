@@ -20,8 +20,8 @@ const failedRestaurantsList = () => ({ type: ACTION_TYPES_RESTAURANT.FAILED_REST
 export const searchRestaurants = (searchList, searchText) => async (dispatch) => {
     let searchTextArray = [];
     if (searchText) {
-        if (searchText.indexOf(' ') > -1) {
-            searchTextArray = searchText.split(' ');
+        if (searchText.indexOf(' ') > -1 || searchText.indexOf(',') > -1) {
+            searchTextArray = searchText.split(new RegExp(' |,', 'g')); //remove spaces and commas
         } else {
             searchTextArray = [searchText];
         }

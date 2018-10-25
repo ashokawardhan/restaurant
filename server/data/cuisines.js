@@ -1,3 +1,4 @@
+// nearly all cuisines from https://en.wikipedia.org/wiki/List_of_cuisines
 export const cuisines = [
     'Albanian',
     'Argentina',

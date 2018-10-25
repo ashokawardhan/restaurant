@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
+import { searchRestaurants } from './actions/restaurantActions';
+import URI from 'urijs';
+const uri = new URI();
+const uriSearchText = uri.search(true).q || null;
 
 const SearchContainer = Loadable({
     loader: () => import('./components/Search/SearchContainer'),
@@ -23,6 +27,18 @@ const RestaurantsContainer = Loadable({
 });
 
 class App extends Component {
+    componentDidMount() {
+        if (uriSearchText) {
+            this.props.searchRestaurants([], uriSearchText); // send call if query string
+        }
+        window.onpopstate = function(event) {
+            if (event && event.state) {
+                window.location.reload(); // reload on back button
+            }
+        }
+
+    }
+
     render() {
         return (
             <div className="App">
@@ -41,7 +57,11 @@ const mapStateToProps = ({ searchInput, restaurants }) => ({
     restaurants: restaurants.restaurants,
 });
 
+const mapDispatchToProps = {
+    searchRestaurants
+}
+
 export default connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps
 )(App);

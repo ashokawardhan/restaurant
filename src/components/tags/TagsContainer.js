@@ -7,7 +7,7 @@ import { searchRestaurants } from '../../actions/restaurantActions';
 class RecentContainer extends Component {
     deleteItem = (text) => {
         const newSearchList = this.props.currentSearchList.filter(search => search !== text);
-        this.props.searchRestaurants(newSearchList);
+        this.props.searchRestaurants(newSearchList, null);
         this.props.removeSearch(text);
     }
 

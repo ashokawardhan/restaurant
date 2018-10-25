@@ -16,7 +16,7 @@ const getRandomCuisines = (neededCuisines) => {
 };
 const getRestaurant = () => (
     {
-        name: faker.company.companyName().replace(new RegExp(',|-|&', 'g'), '').slice(0, 10),
+        name: faker.company.companyName().replace(new RegExp(',|-|&', 'g'), '').slice(0, 10), // only 10 letters for now, as company names returned are way larger
         image: `/images?id=${faker.random.number()}`,
         cuisines: getRandomCuisines(5),
         rating: Math.floor((Math.random() * (500 - 100)) + 100) / 100,
@@ -34,6 +34,7 @@ export const generateListOfRestaurants = (neededRestaurants) => {
 }
 
 export const findRestaurants = (tags, page) => {
+    // search for all restaurnats whose name or cuisines matches any tag
     return restaurantsList.filter((restaurant) => {
         const nameFlag = tags.some(tag => restaurant.name.toLowerCase().indexOf(tag.toLowerCase()) > -1);
         if (nameFlag) {

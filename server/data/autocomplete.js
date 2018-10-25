@@ -15,5 +15,5 @@ const getRandomElements = (list, noItems) => {
 
 export default (search) => {
     const list = [...cuisines, ...restaurantNameList];
-    return getRandomElements(list.filter(name => name.toLowerCase().indexOf(search.toLowerCase()) > -1), 10);
+    return getRandomElements(list.filter(name => name.toLowerCase().indexOf(search.toLowerCase()) > -1), 10); // returns random 10 from list of cuisines and restaurants name which match entered text
 }

@@ -26,7 +26,7 @@ const CloseIcon = styled.div`
 export default props => (
     <TagsContainer>
         {props.list.map(item => (
-            <TagContainer onMouseDown={() => props.onClick(item)}>
+            <TagContainer onMouseDown={() => props.onClick(item)} key={item}>
                 <CloseIcon aria-label="Remove">&times;</CloseIcon>
                 <div>{item}</div>
             </TagContainer>
