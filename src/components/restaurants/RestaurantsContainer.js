@@ -10,6 +10,14 @@ class RestaurantsContainer extends Component {
         sortRating: false,
     };
 
+    componentDidMount() {
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+                this.loadMoreRestaurants();
+            }
+        });
+    }
+
     loadMoreRestaurants = () => {
         this.props.changeRestaurantsPage(this.props.currentSearchList, this.props.restaurants.currentPageNo + 1);
     }
@@ -56,7 +64,6 @@ class RestaurantsContainer extends Component {
                 : restaurantsListClone.sort((a, b) => a.deliveryTime - b.deliveryTime);
         return (
             <RestaurantsComponent
-                loadMoreRestaurants={this.loadMoreRestaurants}
                 restaurants={restaurantsList}
                 loadingInitial={restaurants.loadingInitial}
                 failureInitial={restaurants.failureInitial}

@@ -26,22 +26,8 @@ const RestaurantsListContainer = styled.div`
     }
 `;
 
-const ChangePageContainer = styled.div`
-    text-align: center;
-    margin: 20px;
-`;
-
 const FiltersContainer = styled.div`
     text-align: right;
-    margin: 20px;
-`;
-
-const ChangePageText = styled.span`
-    background-color: #337ab7;
-    padding: 8px 16px;
-    border-radius: 10px;
-    color: #fff;
-    border-color: #2e6da4;
     margin: 20px;
 `;
 
@@ -57,7 +43,7 @@ const FilterText = styled.span`
 `;
 
 export default ({
-    loadMoreRestaurants, restaurants, loadingInitial, failureInitial, loadingAdd, sortByRating, sortByDelivery, sortRatingFilter, sortDeliveryFilter,
+    loadMoreRestaurants, restaurants, loadingInitial, failureInitial, sortByRating, sortByDelivery, sortRatingFilter, sortDeliveryFilter,
 }) => (
     <RestaurantContainer>
         {
@@ -87,14 +73,6 @@ export default ({
                             <RestaurantsListContainer>
                                 {restaurants.map(restaurant => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}
                             </RestaurantsListContainer>
-                            {
-                                !loadingAdd
-                            && (
-                                <ChangePageContainer>
-                                    <ChangePageText onClick={loadMoreRestaurants} aria-label="More restaurants">More</ChangePageText>
-                                </ChangePageContainer>
-                            )
-                            }
                         </Fragment>
                     )
                     }
