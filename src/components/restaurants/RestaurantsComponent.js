@@ -34,11 +34,11 @@ const FiltersContainer = styled.div`
 const FilterText = styled.span`
     padding: 8px 16px;
     border-radius: 10px;
-    color: orange;
+    color: #704900;
     margin: 20px;
     &.active {
         background-color: #fff;
-        border: 1px solid #ccc;
+        border: 1px solid #444;
     }
 `;
 
